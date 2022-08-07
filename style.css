@@ -1,0 +1,21 @@
+/* Pen-specific styles */
+html, body, section {
+    height: 100%;
+    overflow: hidden;
+}
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+} 
+.container {
+display: flex;
+}
+.left-half {
+    background-image: url("./images/test.jpg");
+    background-size: cover;
+    flex: 1;
+    border-radius: 0% 5% 5% 0%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;}
+.right-half {
+    flex: 1;
+}
