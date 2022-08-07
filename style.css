@@ -5,9 +5,9 @@ html, body, section {
 }
 body {
     margin: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
 } 
-.container {
+.page-container {
 display: flex;
 }
 .left-half {
@@ -15,7 +15,55 @@ display: flex;
     background-size: cover;
     flex: 1;
     border-radius: 0% 5% 5% 0%;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;}
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
 .right-half {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    justify-content: center;
+    gap: 12px;
+}
+.right-half>*{
+    margin-left: 75px;
+}
+h1{
+    font-size: xx-large;
+    font-weight: 600;
+}
+#signUp{
+    background-image: linear-gradient(to right, #3d9c77, #42a77f, #47b287, #4cbe90, #51c998);
+    border: none;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    color: white;
+    font-weight: 600;
+    border-radius: 10px;
+}
+
+.showPassword{
+    font-size: small;
+    display: flex;
+    align-items: center;
+}
+input[type=email], input[type=password]{
+    width: 100%;
+    padding: 12px 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: solid #e2e2e2;
+    border-radius: 10px;
+}
+
+input::placeholder{
+    color: #979797;
+}
+.inputField{
+    display: flex;
+    flex-direction: column;
+}
+input, button{
+    max-width: 350px;
 }
