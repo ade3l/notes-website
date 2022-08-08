@@ -10,7 +10,7 @@ body {
     display: flex;
 }
 .left-half {
-    background-image: url("./images/bg2.jpg");
+    background-image: url("../images/bg2.jpg");
     background-size: cover;
     flex: 1;
     border-radius: 0% 5% 5% 0%;
