@@ -73,7 +73,7 @@ h1{
     font-size: xx-large;
     font-weight: 600;
 }
-#signUp{
+#signUp, #login{
     background-image: linear-gradient(to right, #3d9c77, #42a77f, #47b287, #4cbe90, #51c998);
     border: none;
     padding-top: 2%;
@@ -81,8 +81,11 @@ h1{
     color: white;
     font-weight: 600;
     border-radius: 10px;
+    transition: all .3s ease-in-out ;
 }
-
+#signUp:hover, #login:hover{
+    transform: scale(1.1);
+}
 .showPassword{
     font-size: small;
     display: flex;
