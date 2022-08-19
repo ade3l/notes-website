@@ -76,8 +76,8 @@ h1{
 #signUp, #login{
     background-image: linear-gradient(to right, #3d9c77, #42a77f, #47b287, #4cbe90, #51c998);
     border: none;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     margin: 8px 0;
     color: white;
     font-weight: 600;
