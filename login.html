@@ -32,22 +32,25 @@
           </div>
         </div>
         <div class="right-half">
-            <h1>Login</h1>
-            
-            <div class="inputField">
-                <label for="email">Email address</label>
-                <input type="email" name="" placeholder="Enter your email" id="">
-            </div>
-            <div class="inputField">
+            <form action="get">
                 
-                <label for="Password">Password</label>
-                <input type="password" name="" placeholder="Enter password" id="">
-            </div>
-            <div class = "showPassword">
-                <input type="checkbox" name="" id="">
-                <label class="text-small" for="">show password</label>
-            </div>
-            <button id="login">Login →</button>
+                <h1>Login</h1>
+                
+                <div class="inputField">
+                    <label for="email">Email address</label>
+                    <input type="email" name="email" placeholder="Enter your email" id="">
+                </div>
+                <div class="inputField">
+                
+                    <label for="password">Password</label>
+                    <input type="password" name="password" placeholder="Enter password" id="">
+                </div>
+                <div class = "showPassword">
+                    <input type="checkbox" name="password_show" id="">
+                    <label class="text-small" for="password_show">show password</label>
+                </div>
+                <button id="login">Login →</button>
+            </form>
         </div>
       </section>
 </body>
