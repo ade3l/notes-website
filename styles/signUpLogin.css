@@ -101,6 +101,9 @@ input[type=email], input[type=password]{
     border: solid #e2e2e2;
     border-radius: 10px;
 }
+input[type=email]:valid, input[type=password]:valid{
+    border: solid #51c998;
+}
 
 input::placeholder{
     color: #979797;
