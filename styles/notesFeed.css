@@ -56,7 +56,7 @@ header{
 .folders li:hover{
     background-color: #eaeaea;
 }
-.folders li:first-child{
+.folders li.selected{
     background-color: #dcdcdc;
 }
 .folders li::before{
