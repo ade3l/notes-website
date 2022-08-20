@@ -43,6 +43,7 @@ header{
     list-style-type: none;
     padding: 0;
     margin-left: 25px;
+    font-size: 0.9em;
 }
 .folders li{
     padding-top: 10px;
@@ -77,11 +78,60 @@ header{
     padding-bottom: 10px;
     padding-top: 10px;
     font-size: 1rem;
-
+    font-weight: lighter;
 }
+
+
 #contentsList{
     width: 30%;
+}
+#contentsList .note{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+    cursor: pointer;
+    border-top: 1px solid #efefef;
+    border-right: 1px solid #efefef;
 
+}
+#contentsList .note:hover{
+    background-color: #f5fffb;
+}
+#contentsList .note.selected{
+    background-color: #eff8f2;
+}
+#contentsList .updated{
+    font-size: 0.6em;
+    font-weight: 200;
+}
+#contentsList .title{
+    font-size: 1.2em;
+    font-weight: 600;
+}
+#contentsList .selected .title, #contentsList .selected .description{
+    color: #5f6360;
+}
+#contentsList .description{
+    font-size: 0.8em;
+    font-weight: 300;
+}
+#contentsList .tags{
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 0.7em;
+    gap: 5px;
+    margin-top: 5px;
+}
+#contentsList .tag{
+    color: #32A05F;
+    border-radius: 5px;
+    background-color: #e6f4eb;
+    padding: 3px;
+    font-weight: 500;
+}
+#contentsList .selected .tag{
+    background-color: #d8eee0;
 }
 
 #content{
