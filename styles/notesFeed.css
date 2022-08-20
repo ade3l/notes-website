@@ -33,6 +33,7 @@ header{
     font-weight: bolder;
     font-size: 1em;
     gap:12px;
+    margin-left: 20px;
 }
 .user>img{
     max-width: 40px;
@@ -41,14 +42,22 @@ header{
 .folders{
     list-style-type: none;
     padding: 0;
+    margin-left: 25px;
 }
 .folders li{
-    margin-bottom: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    margin-bottom: 0px;
     font-weight: 200;
     cursor: pointer;
+    border-radius: 20px 0 0 20px;
 }
-a:active{
-    color: green;
+.folders li:hover{
+    background-color: #eaeaea;
+}
+.folders li:first-child{
+    background-color: #dcdcdc;
 }
 .folders li::before{
     content: "\25BA \0020";
