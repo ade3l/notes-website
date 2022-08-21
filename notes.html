@@ -117,23 +117,23 @@
             </div>
         </section>
         <section id="content">
-            <div class="title" contenteditable="true">Visual Inspiration</div>
-            <div class="details">
-                <div class="">
-                    <label for="lastUpdated">Last Updated</label>
-                    <span class="updated" name = "lastUpdated">May 5, 2022 at 10:30AM</span>
-                </div>
+            <div class="noteTop">
+                <div class="title" contenteditable="true">Visual Inspiration</div>
+                <div class="details">
+                    <div class="">
+                        <label for="lastUpdated">Last Updated</label>
+                        <span class="updated" name = "lastUpdated">May 5, 2022 at 10:30AM</span>
+                    </div>
                 
-                <div class="">
-                    <label for="tags">Tags</label>
-                    <span class="tags" name="tags">
-                        <span class="tag">#TAGNAME</span>
-                        <span class="tag">#DESIGN</span>
-                        <span class="tag">#NOTES</span>
-                    </span>
+                    <div class="">
+                        <label for="tags">Tags</label>
+                        <span class="tags" name="tags">
+                            <span class="tag">#TAGNAME</span>
+                            <span class="tag">#DESIGN</span>
+                            <span class="tag">#NOTES</span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="editor">
                 <div class="options">
                     <select name="font" id="fontSelector">
                         <option value="Poppins">Poppins</option>
@@ -151,10 +151,11 @@
                         <option value="20">20</option>
                         <option value="22">22</option>
                     </select>
-                    <span><strong>B</strong></span>
+                    <span id="bold"><strong>B</strong></span>
                     <span id="italics"><em>I</em></span>
                 </div>
             </div>
+            <div class="noteText" contenteditable="true"></div>
         </section>
     </div>
 </body>
