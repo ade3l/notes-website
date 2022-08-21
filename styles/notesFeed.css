@@ -1,5 +1,6 @@
 root{
     --default-font:16px;
+    --main-green: #32a05f;
 }
 body{
     height: 100vh;
@@ -8,6 +9,7 @@ body{
     flex-direction: column;
     font-family: 'Poppins', sans-serif;
     font-size: var(--default-font);
+    color: #212121;
 }
 header{
     height: 7%;
@@ -21,7 +23,6 @@ header{
 #leftPanel{
     width: 20%;
     background-color: #F4F4F4;
-    flex-shrink: 0;
     position: fixed;
     left: 0px;
     height: 100%;
@@ -84,6 +85,33 @@ header{
 
 #contentsList{
     width: 30%;
+    overflow-y: scroll;
+}
+#contentsList .topBar{
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 20px;
+    padding-right: 5px;
+    display: flex;
+    justify-content: space-between;
+    border-right: 1px solid #efefef
+}
+#contentsList .topBar select{
+    border: none;
+}
+#contentsList .topBar select:focus{
+    outline: none;
+}
+#contentsList #newNote{
+    background-color: #32a05f;
+    color: white;
+    font-weight: 500;
+    font-size: 0.8em;
+    text-align: center;
+    border: none;
+    padding: 7px 10px;
+    border-radius: 20px;
+    cursor: pointer;
 }
 #contentsList .note{
     padding-top: 10px;
@@ -123,17 +151,51 @@ header{
     gap: 5px;
     margin-top: 5px;
 }
-#contentsList .tag{
+.tag{
     color: #32A05F;
     border-radius: 5px;
     background-color: #e6f4eb;
-    padding: 3px;
+    padding: 4px;
     font-weight: 500;
+    cursor: pointer;
 }
 #contentsList .selected .tag{
     background-color: #d8eee0;
 }
 
 #content{
-    width: 50%;
+    width: 70%;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+    box-sizing: border-box;
+}
+#content .title{
+    font-size: xx-large;
+    margin-bottom: 15px;
+}
+#content .title:focus{
+    outline: none;
+    border: none;
+}
+#content label{
+    color: #666666;    
+}
+#content .details{
+    font-size: small;
+    border-top: 2px solid #efefef;
+    border-bottom: 2px solid #efefef;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap:20px
+}
+#content .tag{
+    margin-left: 10px;    
+}
+#content #italics{
+    font-family: 'Noto Sans';
+    cursor: pointer;
 }

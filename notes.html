@@ -8,8 +8,7 @@
     <title>Document</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@1,500&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"></head>
 <body>
     <!-- <header></header> -->
     <section id="leftPanel">
@@ -29,7 +28,14 @@
     <div class="pageContainer">
         
         <section id="contentsList">
-            <div class="topBar"></div>
+            <div class="topBar">
+                <select name="order" id="orderSelector">
+                    <option value="latest">Last Updated</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="Alphabetical">A-Z</option>
+                </select>
+                <button id="newNote">+ NEW NOTE</button>
+            </div>
 
             <div class="note selected">
                 <div class="updated">NOW</div>
@@ -51,6 +57,7 @@
                     <div class="tag">#DESIGN</div>
                     <div class="tag">#NOTES</div>
                     <div class="tag">#PROJECT</div>
+                    
                 </div>
             </div>
 
@@ -109,7 +116,46 @@
                 </div>
             </div>
         </section>
-        <section id="content"></section>
+        <section id="content">
+            <div class="title" contenteditable="true">Visual Inspiration</div>
+            <div class="details">
+                <div class="">
+                    <label for="lastUpdated">Last Updated</label>
+                    <span class="updated" name = "lastUpdated">May 5, 2022 at 10:30AM</span>
+                </div>
+                
+                <div class="">
+                    <label for="tags">Tags</label>
+                    <span class="tags" name="tags">
+                        <span class="tag">#TAGNAME</span>
+                        <span class="tag">#DESIGN</span>
+                        <span class="tag">#NOTES</span>
+                    </span>
+                </div>
+            </div>
+            <div class="editor">
+                <div class="options">
+                    <select name="font" id="fontSelector">
+                        <option value="Poppins">Poppins</option>
+                        <option value="sans-serif">sans-serif</option>
+                        <option value="Helvetica">Helvetica</option>
+                        <option value="Montserrat">Montserrat</option>
+                        <option value="sans-serif">sans-serif</option>
+                        <option value="sans-serif">sans-serif</option>
+                    </select>
+                    <select name="fontSize" id="sizeSelector">
+                        <option value="12">12</option>
+                        <option value="14">14</option>
+                        <option value="16">16</option>
+                        <option value="18">18</option>
+                        <option value="20">20</option>
+                        <option value="22">22</option>
+                    </select>
+                    <span><strong>B</strong></span>
+                    <span id="italics"><em>I</em></span>
+                </div>
+            </div>
+        </section>
     </div>
 </body>
 </html>
