@@ -5,7 +5,6 @@ const password = form.password;
 form.onsubmit = function(event) {
     event.preventDefault();
     if(email.value==""){
-        console.log(email.value)    
         email.setCustomValidity("Email is required");
         email.reportValidity();
     }
