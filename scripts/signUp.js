@@ -2,7 +2,7 @@ const form = document.querySelector("form");
 const email = form.email;
 const password = form.password;
 const password_conf = form.password_conf;
-
+const showPassword = form.password_show;
 form.onsubmit = function(event) {
     event.preventDefault();
     if(email.value==""){
@@ -44,4 +44,16 @@ password.onkeydown = function(event) {
 password_conf.onkeydown = function(event) {
     password_conf.setCustomValidity("");
     password_conf.reportValidity();
+}
+
+//when the show password button is clicked, show the password
+showPassword.onclick = function(event) {
+    if(showPassword.checked){
+        password.type = "text";
+        password_conf.type = "text";
+    }
+    else{
+        password.type = "password";
+        password_conf.type = "password";
+    }
 }
