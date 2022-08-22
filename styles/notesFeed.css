@@ -240,6 +240,6 @@ header{
     outline: 0;
 }
 .noteText:empty:not(:focus):before{
-    content:"h";
+    content:"Spill your best ideas here";
     color:#828181;
 }
