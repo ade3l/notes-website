@@ -34,3 +34,13 @@ password.onkeydown = function(event) {
     password.reportValidity();
 }
 
+//When the show password button is clicked, show the password
+const showPassword = form.password_show;
+showPassword.onclick = function(event) {
+    if(showPassword.checked){
+        password.type = "text";
+    }
+    else{
+        password.type = "password";
+    }
+}
