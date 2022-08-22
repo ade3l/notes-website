@@ -14,8 +14,9 @@ form.onsubmit = function(event) {
         password.reportValidity();
     }
     //check if password is at least 8 characters long
-    else if(password.value.length<8){
-        password.setCustomValidity("Password must be at least 8 characters long");
+    else if(!password.value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/)){
+        console.log("object");
+        password.setCustomValidity("Password must contain at least one number, one uppercase letter, one special character, and be between 8 and 15 characters long");
         password.reportValidity();
     }
 
@@ -23,10 +24,7 @@ form.onsubmit = function(event) {
         password_conf.setCustomValidity("Password is required");
         password_conf.reportValidity();
     }
-    else if(password_conf.value.length<8){
-        password_conf.setCustomValidity("Password must be at least 8 characters long");
-        password_conf.reportValidity();
-    }
+
     else if(password.value!=password_conf.value){
         password_conf.setCustomValidity("Passwords do not match");
         password_conf.reportValidity();
