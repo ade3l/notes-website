@@ -13,15 +13,20 @@
 </head>
 <body>
 <?php
+        session_start();
         $email = $password = "";
+        $valid = true;
         $error = "";
+        if(isset($_SESSION["email"])){
+            echo "here";
+            header("Location: notes.html");
+            die();
+        }
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             if(!empty($_POST["email"]) && !empty($_POST["password"])){
                 $email = clean_input($_POST["email"]);
-                echo $email ."<br>";
                 $password = clean_input($_POST["password"]);
-                echo $password ."<br>";
-
+                // echo $email." ".$password;
                 $conn = new mysqli("localhost", "root", "","notes_website","3306");
                 if($conn->connect_error){
                     die("Connection faild:". $conn->connect_error);
@@ -30,13 +35,22 @@
                 $result = $conn -> query($sql);
                 if($result){
                     if($result->num_rows == 0){
-                        $err = "Please recheck your username and password";
+                        $valid = false;
+                        $error = "Please recheck your username and password";
                     }
                 }
                 else{
                     echo "failure";
                 }
                 $conn->close();
+
+                if($valid){
+                    echo "here";
+                    session_start();
+                    $_SESSION["email"] = $email;
+                    header("Location: notes.html");
+                    die();
+                }
             }
         }
         
@@ -71,10 +85,10 @@
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="loginForm">
                 
                 <h1>Login</h1>
-                
+                <?php if(!$valid) echo "<p>".$error."</p>"; $error = "";?>
                 <div class="inputField">
                     <label for="email">Email address</label>
-                    <input type="email" name="email" placeholder="Enter your email" >
+                    <input type="email" name="email" placeholder="Enter your email" value="<?php echo $email;?>">
                 </div>
                 <div class="inputField">
                 
