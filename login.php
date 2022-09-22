@@ -12,6 +12,41 @@
     <script src="./scripts/login.js" defer></script>
 </head>
 <body>
+<?php
+        $email = $password = "";
+        $error = "";
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            if(!empty($_POST["email"]) && !empty($_POST["password"])){
+                $email = clean_input($_POST["email"]);
+                echo $email ."<br>";
+                $password = clean_input($_POST["password"]);
+                echo $password ."<br>";
+
+                $conn = new mysqli("localhost", "root", "","notes_website","3306");
+                if($conn->connect_error){
+                    die("Connection faild:". $conn->connect_error);
+                }
+                $sql = "SELECT * from login_info where email= '$email' and password = '$password' ";
+                $result = $conn -> query($sql);
+                if($result){
+                    if($result->num_rows == 0){
+                        $err = "Please recheck your username and password";
+                    }
+                }
+                else{
+                    echo "failure";
+                }
+                $conn->close();
+            }
+        }
+        
+        function clean_input($data){
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
+    ?>
     <section class="page-container">
         <div class="left-half" style="background-image: url(images/bg4.jpg);">
           <div class="container">
