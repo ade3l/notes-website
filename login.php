@@ -33,7 +33,7 @@
           </div>
         </div>
         <div class="right-half">
-            <form action="get" id="loginForm">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="loginForm">
                 
                 <h1>Login</h1>
                 
