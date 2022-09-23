@@ -46,7 +46,7 @@
                         session_start();
                         $_SESSION["LOGGED_IN"] = "TRUE";
                         $_SESSION["name"] = $name;
-                        header("Location: notes.html");
+                        header("Location: notes.php");
                     }
                 }
                 $conn->close();

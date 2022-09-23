@@ -39,8 +39,8 @@
                         $error = "Please recheck your username and password";
                     }
                     if($result->num_rows == 1){
-                        while($result->fetch_assoc()){
-                            $name = $result["name"];
+                        while($row = $result->fetch_assoc()){
+                            $name = $row["name"];
                             
                         }
                         $valid = true;
@@ -56,7 +56,7 @@
                     session_start();
                     $_SESSION["LOGGED_IN"] = "TRUE";
                     $_SESSION["name"] = $name;
-                    header("Location: notes.html");
+                    header("Location: notes.php");
                     die();
                 }
             }
