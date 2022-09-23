@@ -21,12 +21,13 @@
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             
             // echo "here1";
-            $email = $pwd = $pwd_conf = "";
+            $name = $email = $pwd = $pwd_conf = "";
+            $name = clean_input($_POST["name"]);
             $email = clean_input($_POST["email"]);
             $pwd = clean_input($_POST["password"]);
             $pwd_conf = clean_input($_POST["password_conf"]);
             // echo "input ".$email." ".$pwd." ".$pwd_conf;
-            if($email!="" && strcmp($pwd,$pwd_conf)==0){
+            if($name != "" && $email!="" && strcmp($pwd,$pwd_conf)==0){
                 $conn = new mysqli("localhost", "root", "", "notes_website");
                 if($conn->connect_error){
                     echo "connection failure"+ $conn->connection_error;
@@ -40,17 +41,18 @@
                         $error = "An account with this email already exists";
                     }
                     else{
-                        $sql = "INSERT INTO login_info values('$email','$pwd');";
+                        $sql = "INSERT INTO login_info values('$email','$pwd','$name');";
                         $conn->query($sql);
                         session_start();
                         $_SESSION["LOGGED_IN"] = "TRUE";
+                        $_SESSION["name"] = $name;
                         header("Location: notes.html");
                     }
                 }
                 $conn->close();
             }
             else {
-                echo $email;
+                $error = "Please check that all fields are filled";
             }
         }
         function clean_input($data){
@@ -84,10 +86,13 @@
             <form action="signUp.php" method="post" id="#signUpForm">
                 <h1>Sign up</h1>
                 <?php if($error!="") echo $error;?>
-                
+                <div class="inputField">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="" placeholder="Enter your name"  required >
+                </div>
                 <div class="inputField">
                     <label for="email">Email address</label>
-                    <input type="email" name="email" id="formEmail" placeholder="Enter your email"  >
+                    <input type="email" name="email" id="" placeholder="Enter your email"  >
                 </div>
                 <div class="inputField">
                 

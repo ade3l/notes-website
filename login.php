@@ -23,6 +23,7 @@
         }
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             if(!empty($_POST["email"]) && !empty($_POST["password"])){
+                $name = "";
                 $email = clean_input($_POST["email"]);
                 $password = clean_input($_POST["password"]);
                 // echo $email." ".$password;
@@ -38,6 +39,10 @@
                         $error = "Please recheck your username and password";
                     }
                     if($result->num_rows == 1){
+                        while($result->fetch_assoc()){
+                            $name = $result["name"];
+                            
+                        }
                         $valid = true;
                     }
                 }
@@ -49,7 +54,8 @@
                 if($valid){
                     echo "here";
                     session_start();
-                    $_SESSION["email"] = $email;
+                    $_SESSION["LOGGED_IN"] = "TRUE";
+                    $_SESSION["name"] = $name;
                     header("Location: notes.html");
                     die();
                 }
