@@ -17,8 +17,8 @@
         $email = $password = "";
         $valid = false;
         $error = "";
-        if(isset($_SESSION["LOGGED_IN"])){
-            header("Location: notes.html");
+        if(isset($_SESSION["LOGGED_IN"]) && isset($_SESSION["name"])){
+            header("Location: notes.php");
             die();
         }
         if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -55,7 +55,7 @@
                     echo "here";
                     session_start();
                     $_SESSION["LOGGED_IN"] = "TRUE";
-                    $_SESSION["name"] = $name;
+                    $_SESSION["name"] ="$name";
                     header("Location: notes.php");
                     die();
                 }

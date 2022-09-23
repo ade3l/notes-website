@@ -14,7 +14,7 @@
      <?php
         session_start();
         if(isset($_SESSION["LOGGED_IN"])){
-            header("Location: notes.html");
+            header("Location: notes.php");
         }
         $valid = false;
         $error = "";
