@@ -9,9 +9,57 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="./scripts/signUp.js" defer></script>
 </head>
 <body>
+     <?php
+        session_start();
+        if(isset($_SESSION["LOGGED_IN"])){
+            header("Location: notes.html");
+        }
+        $valid = false;
+        $error = "";
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            
+            // echo "here1";
+            $email = $pwd = $pwd_conf = "";
+            $email = clean_input($_POST["email"]);
+            $pwd = clean_input($_POST["password"]);
+            $pwd_conf = clean_input($_POST["password_conf"]);
+            // echo "input ".$email." ".$pwd." ".$pwd_conf;
+            if($email!="" && strcmp($pwd,$pwd_conf)==0){
+                $conn = new mysqli("localhost", "root", "", "notes_website");
+                if($conn->connect_error){
+                    echo "connection failure"+ $conn->connection_error;
+                    die();
+                }
+                $sql = "SELECT * FROM login_info where email = '$email' ;";
+                $result = $conn->query($sql);
+                if($result){
+                    if($result->num_rows!=0){
+                        $valid = false;
+                        $error = "An account with this email already exists";
+                    }
+                    else{
+                        $sql = "INSERT INTO login_info values('$email','$pwd');";
+                        $conn->query($sql);
+                        session_start();
+                        $_SESSION["LOGGED_IN"] = "TRUE";
+                        header("Location: notes.html");
+                    }
+                }
+                $conn->close();
+            }
+            else {
+                echo $email;
+            }
+        }
+        function clean_input($data){
+            $data = stripslashes($data);
+            $data = trim($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
+    ?> 
     <section class="page-container">
         <div class="left-half">
           <div class="container">
@@ -33,12 +81,13 @@
           </div>
         </div>
         <div class="right-half">
-            <form action="get">
+            <form action="signUp.php" method="post" id="#signUpForm">
                 <h1>Sign up</h1>
+                <?php if($error!="") echo $error;?>
                 
                 <div class="inputField">
                     <label for="email">Email address</label>
-                    <input type="email" name="email" placeholder="Enter your email"  >
+                    <input type="email" name="email" id="formEmail" placeholder="Enter your email"  >
                 </div>
                 <div class="inputField">
                 
@@ -57,5 +106,7 @@
             </form>
         </div>
       </section>
+    <script src="./scripts/signUp.js" defer></script>
+
 </body>
 </html>

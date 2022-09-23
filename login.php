@@ -15,10 +15,9 @@
 <?php
         session_start();
         $email = $password = "";
-        $valid = true;
+        $valid = false;
         $error = "";
-        if(isset($_SESSION["email"])){
-            echo "here";
+        if(isset($_SESSION["LOGGED_IN"])){
             header("Location: notes.html");
             die();
         }
@@ -37,6 +36,9 @@
                     if($result->num_rows == 0){
                         $valid = false;
                         $error = "Please recheck your username and password";
+                    }
+                    if($result->num_rows == 1){
+                        $valid = true;
                     }
                 }
                 else{
