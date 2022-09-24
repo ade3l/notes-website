@@ -17,7 +17,7 @@
         $email = $password = "";
         $valid = false;
         $error = "";
-        if(isset($_SESSION["LOGGED_IN"]) && isset($_SESSION["name"])){
+        if(isset($_SESSION["LOGGED_IN"]) && isset($_SESSION["Pname"])){
             header("Location: notes.php");
             die();
         }
@@ -41,7 +41,6 @@
                     if($result->num_rows == 1){
                         while($row = $result->fetch_assoc()){
                             $name = $row["name"];
-                            
                         }
                         $valid = true;
                     }
@@ -53,9 +52,9 @@
 
                 if($valid){
                     echo "here";
-                    session_start();
                     $_SESSION["LOGGED_IN"] = "TRUE";
-                    $_SESSION["name"] ="$name";
+                    $_SESSION["name"] =" $name";
+                    $_SESSION["email"] = "$email";
                     header("Location: notes.php");
                     die();
                 }

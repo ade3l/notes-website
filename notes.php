@@ -12,19 +12,17 @@
 <body>
     <?php 
         session_start();
-        if(!isset($_SESSION["LOGGED_IN"]) || !isset($_SESSION["name"])){
+        if(!isset($_SESSION["LOGGED_IN"]) || !isset($_SESSION["name"]) || !isset($_SESSION["email"])){
             header("location: index.html");
             die();
         }
-        // if(!isset($_SESSION["LOGGED_IN"]) || !isset($_SESSION["name"])){
-
-        // }
+        // echo '<pre>'; var_dump($_SESSION); echo '</pre>'; 
 
     ?>
     <section id="leftPanel">
         <div class="user">
             <img src="./images/avatar.png" alt="">
-            <p class="userName">Steve Harris</p>
+            <p class="userName"><?php echo($_SESSION['name']);?></p>
         </div>
         <ul class="folders">
             <li class = "selected" onclick="location.href='javascript:void(0);'">Notes</li>
@@ -46,85 +44,36 @@
                 </select>
                 <button id="newNote">+ NEW NOTE</button>
             </div>
+            <?php 
+                $conn = new mysqli("localhost","root","", "notes_website");
+                $email = $_SESSION["email"];
 
-            <div class="note selected">
-                <div class="updated">NOW</div>
-                <div class="title">Untitled</div>
-                <div class="description">No description yet</div>
-                <div class="tags">
-                    <div class="tag">#TAGNAME</div>
-                    <div class="tag">#DESIGN</div>
-                    <div class="tag">#NOTES</div>
-                </div>
-            </div>
+                $sql = "SELECT * FROM notes where email='$email'";
+                $result = $conn->query($sql);
+                if($result){
+                    if($result->num_rows>0){
+                        while($row = $result->fetch_assoc()){
+                            $title = $row['title'];
+                            $date = date("d-M-Y",strtotime($row['date']));
+                            $note = $row['note'];
+                            $id = $row['id'];
+                            echo "<div class = 'note' data-key='$id'>";
+                            echo "<div class = 'updated'>$date</div>";
+                            echo "<div class = 'title'>$title</div>";
+                            echo "<div class='description'>$note</div>";
+                            echo "<div class='tags'>";
+                            echo "<div class='tag'>#TAGNAME</div>
+                                    <div class='tag'>#DESIGN</div>
+                            <div class='tag'>#NOTES</div>
+                            </div>";
+                            echo "</div>";
 
-            <div class="note">
-                <div class="updated">MAY 5</div>
-                <div class="title">Visual Inspiration</div>
-                <div class="description">Let's collect inspiration for our project</div>
-                <div class="tags">
-                    <div class="tag">#TAGNAME</div>
-                    <div class="tag">#DESIGN</div>
-                    <div class="tag">#NOTES</div>
-                    <div class="tag">#PROJECT</div>
-                    
-                </div>
-            </div>
 
-            <div class="note">
-                <div class="updated">MAY 5</div>
-                <div class="title">HTML Tags</div>
-                <div class="description">Here are some useful tags</div>
-                <div class="tags">
-                    <div class="tag">#TAGNAME</div>
-                    <div class="tag">#HTML</div>
-                    <div class="tag">#NOTES</div>
-                </div>
-            </div>
-
-            <div class="note">
-                <div class="updated">MAY 5</div>
-                <div class="title">Business Plan</div>
-                <div class="description">I wanted to create a notebook for our project plan</div>
-                <div class="tags">
-                    <div class="tag">#TAGNAME</div>
-                    <div class="tag">#DESIGN</div>
-                    <div class="tag">#NOTES</div>
-                </div>
-            </div>
-
-            <div class="note">
-                <div class="updated">MAY 5</div>
-                <div class="title">Design References</div>
-                <div class="description">Inspiration for our project</div>
-                <div class="tags">
-                    <div class="tag">#TAGNAME</div>
-                    <div class="tag">#DESIGN</div>
-                    <div class="tag">#NOTES</div>
-                </div>
-            </div>
-
-            <div class="note">
-                <div class="updated">MAY 5</div>
-                <div class="title">Note Title Example</div>
-                <div class="description">No description yet</div>
-                <div class="tags">
-                    <div class="tag">#TAGNAME</div>
-                    <div class="tag">#DESIGN</div>
-                    <div class="tag">#NOTES</div>
-                </div>
-            </div>
-
-            <div class="note">
-                <div class="updated">May 5</div>
-                <div class="title">Note Title Example</div>
-                <div class="description">No description yet</div>
-                <div class="tags">
-                    <div class="tag">#TAGNAME</div>
-                    <div class="tag">#DESIGN</div>
-                    <div class="tag">#NOTES</div>
-                </div>
-            </div>
+                        }
+                    }
+                }
+            ?>
+            
         </section>
         <section id="content">
             <div class="noteTop">
