@@ -1,4 +1,5 @@
 <?php 
+    session_start();
     try {
         $conn = new mysqli("localhost", "root", "","notes_website","3306") ;
         if($conn->connect_error){
@@ -8,7 +9,7 @@
             $json = file_get_contents('php://input');
             $data = json_decode($json);
             if($data->action == "delete"){
-                $email = $data->email;
+                $email = $_SESSION["email"];
                 $id = $data->id;
                 $sql = "DELETE FROM notes WHERE id='$id' and email='$email'";
                 $result = $conn->query($sql);
@@ -23,7 +24,7 @@
                 $title = $data->title;
                 $note = $data->note;
                 $id = $data->id;
-                $email = $data->email;
+                $email = $_SESSION["email"];
                 $date = date("Y-m-d H:i:s:u");
                 $sql = "UPDATE notes SET title='$title', note='$note', date = UTC_TIMESTAMP() WHERE id='$id' and email='$email'";
                 $result = $conn->query($sql);

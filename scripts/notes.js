@@ -1,12 +1,11 @@
 notes = document.querySelectorAll(".note")
-email = document.querySelector("#email").value
 console.log(email);
 notes.forEach(note=>{
     note.addEventListener("click",()=>{
         noteRequest = new XMLHttpRequest();
         noteRequest.open("POST","./scripts/fetchNote.php");
         noteRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        noteRequest.send("note_id="+note.getAttribute("data-key")+ "&email="+email);
+        noteRequest.send("note_id="+note.getAttribute("data-key"));
         noteRequest.onload = ()=>{
             object = JSON.parse(noteRequest.responseText);
             document.querySelector(".noteTop .title").innerText = object.title;
@@ -45,7 +44,7 @@ document.querySelector("#deleteNote").addEventListener("click",()=>{
     saveRequest = new XMLHttpRequest();
     saveRequest.open("POST","./scripts/modifyNote.php")
     saveRequest.setRequestHeader("Content-type","application/json")
-    saveRequest.send(JSON.stringify({action:"delete",id:note_id, email:email}));
+    saveRequest.send(JSON.stringify({action:"delete",id:note_id}));
     saveRequest.onload = ()=>{
         if(saveRequest.responseText == "success"){
             location.reload();
@@ -66,7 +65,7 @@ document.querySelector("#saveNote").addEventListener("click",()=>{
         saveRequest.open("POST","./scripts/modifyNote.php");
         saveRequest.setRequestHeader("Content-type","application/json")
         //Stringify all of the data to send it to the server
-        saveRequest.send(JSON.stringify({action:"save",id:note_id,title:note_title,note:note_text,tags:note_tags,email:email, date:Date.now()}));
+        saveRequest.send(JSON.stringify({action:"save",id:note_id,title:note_title,note:note_text,tags:note_tags, date:Date.now()}));
         // console.log(JSON.stringify({action:"save",id:note_id,title:note_title,note:note_text,tags:note_tags,email:email}));
         saveRequest.onload = ()=>{
             if(saveRequest.responseText == "success"){
@@ -76,5 +75,15 @@ document.querySelector("#saveNote").addEventListener("click",()=>{
 
             }
         }
+    }
+})
+
+document.querySelector("#newNote").addEventListener("click",()=>{
+    newNoteRequest = new XMLHttpRequest();
+    newNoteRequest.open("POST","./scripts/createNote.php");
+    newNoteRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    newNoteRequest.send();
+    newNoteRequest.onload = ()=>{
+        console.log(newNoteRequest.responseText);
     }
 })

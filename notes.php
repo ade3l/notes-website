@@ -18,8 +18,6 @@
             header("location: index.html");
             die();
         }
-        //Add a hidden input field to the form to store the user's email
-        echo "<input type='hidden' id='email' value='".$_SESSION["email"]."'>";
         // echo '<pre>'; var_dump($_SESSION); echo '</pre>'; 
 
     ?>

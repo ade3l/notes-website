@@ -17,7 +17,7 @@
         $email = $password = "";
         $valid = false;
         $error = "";
-        if(isset($_SESSION["LOGGED_IN"]) && isset($_SESSION["name"])){
+        if(isset($_SESSION["LOGGED_IN"]) && isset($_SESSION["name"]) && isset($_SESSION["email"])){
             header("Location: notes.php");
             die();
         }

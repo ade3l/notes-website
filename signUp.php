@@ -46,6 +46,7 @@
                         session_start();
                         $_SESSION["LOGGED_IN"] = "TRUE";
                         $_SESSION["name"] = $name;
+                        $_SESSION["email"] = $email;
                         header("Location: notes.php");
                     }
                 }
