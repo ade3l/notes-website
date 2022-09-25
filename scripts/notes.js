@@ -39,14 +39,17 @@ notes.forEach(note=>{
 })
 
 document.querySelector("#deleteNote").addEventListener("click",()=>{
-    note_id = document.querySelector("#note_id").value;
-    saveRequest = new XMLHttpRequest();
-    saveRequest.open("POST","./scripts/modifyNote.php")
-    saveRequest.setRequestHeader("Content-type","application/json")
-    saveRequest.send(JSON.stringify({action:"delete",id:note_id}));
-    saveRequest.onload = ()=>{
-        if(saveRequest.responseText == "success"){
-            location.reload();
+    //Confirm if the user wants to delete the note
+    if(confirm("Are you sure you want to delete this note?")){
+        note_id = document.querySelector("#note_id").value;
+        saveRequest = new XMLHttpRequest();
+        saveRequest.open("POST","./scripts/modifyNote.php")
+        saveRequest.setRequestHeader("Content-type","application/json")
+        saveRequest.send(JSON.stringify({action:"delete",id:note_id}));
+        saveRequest.onload = ()=>{
+            if(saveRequest.responseText == "success"){
+                location.reload();
+            }
         }
     }
 })
