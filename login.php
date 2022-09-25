@@ -25,7 +25,8 @@
             if(!empty($_POST["email"]) && !empty($_POST["password"])){
                 $name = "";
                 $email = clean_input($_POST["email"]);
-                $password = clean_input($_POST["password"]);
+                //Hash the password
+                $password = hash("sha256",clean_input($_POST["password"]));
                 // echo $email." ".$password;
                 $conn = new mysqli("localhost", "root", "","notes_website","3306");
                 if($conn->connect_error){

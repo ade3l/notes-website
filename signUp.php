@@ -28,6 +28,7 @@
             $pwd_conf = clean_input($_POST["password_conf"]);
             // echo "input ".$email." ".$pwd." ".$pwd_conf;
             if($name != "" && $email!="" && strcmp($pwd,$pwd_conf)==0){
+                $pwd = hash("sha256",$pwd);
                 $conn = new mysqli("localhost", "root", "", "notes_website");
                 if($conn->connect_error){
                     echo "connection failure"+ $conn->connection_error;
