@@ -10,7 +10,16 @@ notes.forEach(note=>{
         noteRequest.onload = ()=>{
             object = JSON.parse(noteRequest.responseText);
             document.querySelector(".noteTop .title").innerText = object.title;
-            document.querySelector(".noteTop .updated").innerText = object.date;
+
+            // wrong_date will contain date in the local browser timezone.
+            //  But the time will be wrong because server returns time in UTC
+            wrong_date = new Date(object.date);
+
+            //Now we change the timezone of the date to UTC
+            date = new Date(Date.UTC(wrong_date.getFullYear(), wrong_date.getMonth(), wrong_date.getDate(), wrong_date.getHours(), wrong_date.getMinutes(), wrong_date.getSeconds()));
+
+            dateOptions = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' }
+            document.querySelector(".noteTop .updated").innerText = date.toLocaleString(undefined,dateOptions);
             document.querySelector(".noteText").innerText = object.note;
             // parse tags and add them to the tag list
             // tags will be an array parsed from object.tags

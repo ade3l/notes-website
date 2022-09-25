@@ -13,7 +13,7 @@
             $row = $result->fetch_assoc();
             $id = $row['id'];
             $title = $row['title'];
-            $date = date("M d, Y \a\\t h:ia",strtotime($row['date']));
+            $date = $row['date'];
             $note = $row['note'];
             $tags = $row['tags'];
             //return the data in json format
