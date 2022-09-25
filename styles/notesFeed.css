@@ -102,7 +102,7 @@ header{
 #contentsList .topBar select:focus{
     outline: none;
 }
-#contentsList #newNote{
+button{
     background-color: #32a05f;
     color: white;
     font-weight: 500;
