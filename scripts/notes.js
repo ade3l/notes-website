@@ -35,8 +35,8 @@ document.querySelector("#deleteNote").addEventListener("click",()=>{
     note_id = document.querySelector("#note_id").value;
     saveRequest = new XMLHttpRequest();
     saveRequest.open("POST","./scripts/modifyNote.php")
-    saveRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded")
-    saveRequest.send("action=delete"+"&id="+note_id+"&email="+email);
+    saveRequest.setRequestHeader("Content-type","application/json")
+    saveRequest.send(JSON.stringify({action:"delete",id:note_id, email:email}));
     saveRequest.onload = ()=>{
         if(saveRequest.responseText == "success"){
             location.reload();
@@ -64,7 +64,7 @@ document.querySelector("#saveNote").addEventListener("click",()=>{
                 location.reload();
             }
             else{
-                
+
             }
         }
     }
