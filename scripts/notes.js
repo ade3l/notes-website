@@ -8,7 +8,21 @@ notes.forEach(note=>{
         noteRequest.onload = ()=>{
             object = JSON.parse(noteRequest.responseText);
             document.querySelector(".noteTop .title").innerText = object.title;
-            document.querySelector(".noteText").innerText = object.note;           
+            document.querySelector(".noteTop .updated").innerText = object.date;
+            document.querySelector(".noteText").innerText = object.note;
+            // parse tags and add them to the tag list
+            // tags will be an array parsed from object.tags
+            tags = JSON.parse(object.tags);
+            tagsContainer = document.querySelector(".noteTop .tags");
+            tagsContainer.innerText = "";
+            if(tags!=null){
+                tags.forEach(tag=>{
+                    tagElement = document.createElement("span");
+                    tagElement.classList.add("tag");
+                    tagElement.innerText = tag;
+                    tagsContainer.appendChild(tagElement);
+                })
+            }
         }
     })
 })

@@ -89,9 +89,7 @@
                     <div class="">
                         <label for="tags">Tags</label>
                         <span class="tags" name="tags">
-                            <span class="tag">#TAGNAME</span>
-                            <span class="tag">#DESIGN</span>
-                            <span class="tag">#NOTES</span>
+                    
                         </span>
                     </div>
                 </div>
