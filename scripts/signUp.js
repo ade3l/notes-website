@@ -17,12 +17,12 @@ form.onsubmit = function(event) {
         valid = false
     }
     //check if password is at least 8 characters long
-    else if(!password.value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/)){
-        console.log("object");
-        password.setCustomValidity("Password must contain at least one number, one uppercase letter, one special character, and be between 8 and 15 characters long");
-        password.reportValidity();
-        valid = false
-    }
+    // else if(!password.value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/)){
+    //     console.log("object");
+    //     password.setCustomValidity("Password must contain at least one number, one uppercase letter, one special character, and be between 8 and 15 characters long");
+    //     password.reportValidity();
+    //     valid = false
+    // }
 
     else if(password_conf.value==""){
         password_conf.setCustomValidity("Password is required");
@@ -38,7 +38,6 @@ form.onsubmit = function(event) {
     console.log(valid);
     if(valid){
         form.submit()
-        console.log("object");
         return true
     }
     return false;

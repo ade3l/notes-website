@@ -11,18 +11,16 @@ form.onsubmit = function(event) {
         valid = false
     }
     else if(password.value==""){
-        console.log("hwllo");       
         password.setCustomValidity("Password is required");
         password.reportValidity();
         valid = false
     }
     //Check password for at least one number and one uppercase letter and one special character
-    else if(!password.value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/)){
-        console.log("object");
-        password.setCustomValidity("Password must contain at least one number, one uppercase letter, one special character, and be between 8 and 15 characters long");
-        password.reportValidity();
-        valid = false
-    }
+    // else if(!password.value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/)){
+    //     password.setCustomValidity("Password must contain at least one number, one uppercase letter, one special character, and be between 8 and 15 characters long");
+    //     password.reportValidity();
+    //     valid = false
+    // }
     if(valid){
         form.submit()
         return true
