@@ -43,3 +43,29 @@ document.querySelector("#deleteNote").addEventListener("click",()=>{
         }
     }
 })
+changed = true;
+document.querySelector("#saveNote").addEventListener("click",()=>{
+    note_id = document.querySelector("#note_id").value;
+    if(changed){
+        note_title = document.querySelector(".noteTop .title").innerText;
+        note_text = document.querySelector(".noteText").innerText;
+        note_tags = [];
+        document.querySelectorAll(".noteTop .tags .tag").forEach(tag=>{
+            note_tags.push(tag.innerText);
+        })
+        saveRequest = new XMLHttpRequest();
+        saveRequest.open("POST","./scripts/modifyNote.php");
+        saveRequest.setRequestHeader("Content-type","application/json")
+        //Stringify all of the data to send it to the server
+        saveRequest.send(JSON.stringify({action:"save",id:note_id,title:note_title,note:note_text,tags:note_tags,email:email, date:Date.now()}));
+        // console.log(JSON.stringify({action:"save",id:note_id,title:note_title,note:note_text,tags:note_tags,email:email}));
+        saveRequest.onload = ()=>{
+            if(saveRequest.responseText == "success"){
+                location.reload();
+            }
+            else{
+                
+            }
+        }
+    }
+})
