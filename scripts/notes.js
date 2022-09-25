@@ -1,5 +1,4 @@
 notes = document.querySelectorAll(".note")
-console.log(email);
 notes.forEach(note=>{
     note.addEventListener("click",()=>{
         noteRequest = new XMLHttpRequest();
@@ -84,6 +83,8 @@ document.querySelector("#newNote").addEventListener("click",()=>{
     newNoteRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     newNoteRequest.send();
     newNoteRequest.onload = ()=>{
-        console.log(newNoteRequest.responseText);
+        if(newNoteRequest.responseText == "success"){
+            location.reload();
+        }
     }
 })
