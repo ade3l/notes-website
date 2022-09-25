@@ -1,7 +1,8 @@
 <?php
     $note_id = $_REQUEST["note_id"];
+    $email = $_REQUEST["email"];
     $conn = new mysqli("localhost", "root","", "notes_website");
-    $sql = "SELECT * FROM notes where id = '$note_id'";
+    $sql = "SELECT * FROM notes where id = '$note_id' and email = '$email'";
     if($conn->connect_error){
         echo "connection failure";
         die();

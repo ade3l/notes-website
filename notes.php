@@ -18,6 +18,8 @@
             header("location: index.html");
             die();
         }
+        //Add a hidden input field to the form to store the user's email
+        echo "<input type='hidden' id='email' value='".$_SESSION["email"]."'>";
         // echo '<pre>'; var_dump($_SESSION); echo '</pre>'; 
 
     ?>
@@ -78,7 +80,13 @@
             
         </section>
         <section id="content">
+
             <div class="noteTop">
+                <button id="deleteNote">DELETE</button>
+                <button id="saveNote">SAVE</button>
+
+                <!-- A hidden input field with the note id -->
+                <input type="hidden" id="note_id">
                 <div class="title" contenteditable="true">Visual Inspiration</div>
                 <div class="details">
                     <div class="">
