@@ -22,7 +22,18 @@ form.onsubmit = function(event) {
     //     valid = false
     // }
     if(valid){
-        form.submit()
+        loginRequest = new XMLHttpRequest();
+        loginRequest.open("POST","./scripts/validateDetails.php");
+        loginRequest.setRequestHeader("Content-type","application/json");
+        loginRequest.send(JSON.stringify({action:"login", email:email.value, password:password.value}))
+        loginRequest.onload = ()=>{
+            if(loginRequest.responseText == "success"){
+                location.reload();
+            }
+            else{
+                document.querySelector(".error").innerText = "Please recheck your email and password";
+            }
+        }
         return true
     }
     return false;

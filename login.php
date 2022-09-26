@@ -21,53 +21,6 @@
             header("Location: notes.php");
             die();
         }
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            if(!empty($_POST["email"]) && !empty($_POST["password"])){
-                $name = "";
-                $email = clean_input($_POST["email"]);
-                //Hash the password
-                $password = hash("sha256",clean_input($_POST["password"]));
-                // echo $email." ".$password;
-                $conn = new mysqli("localhost", "root", "","notes_website","3306");
-                if($conn->connect_error){
-                    die("Connection faild:". $conn->connect_error);
-                }
-                $sql = "SELECT * from login_info where email= '$email' and password = '$password' ";
-                $result = $conn -> query($sql);
-                if($result){
-                    if($result->num_rows == 0){
-                        $valid = false;
-                        $error = "Please recheck your username and password";
-                    }
-                    if($result->num_rows == 1){
-                        while($row = $result->fetch_assoc()){
-                            $name = $row["name"];
-                        }
-                        $valid = true;
-                    }
-                }
-                else{
-                    echo "failure";
-                }
-                $conn->close();
-
-                if($valid){
-                    echo "here";
-                    $_SESSION["LOGGED_IN"] = "TRUE";
-                    $_SESSION["name"] =" $name";
-                    $_SESSION["email"] = "$email";
-                    header("Location: notes.php");
-                    die();
-                }
-            }
-        }
-        
-        function clean_input($data){
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-            return $data;
-        }
     ?>
     <section class="page-container">
         <div class="left-half" style="background-image: url(images/bg4.jpg);">
@@ -93,7 +46,7 @@
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="loginForm">
                 
                 <h1>Login</h1>
-                <?php if(!$valid) echo "<p>".$error."</p>"; $error = "";?>
+                <p class="error"></p>
                 <div class="inputField">
                     <label for="email">Email address</label>
                     <input type="email" name="email" placeholder="Enter your email" value="<?php echo $email;?>">
