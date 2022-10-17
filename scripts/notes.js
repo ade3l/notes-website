@@ -6,22 +6,30 @@ notes.forEach(note=>{
         noteRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         noteRequest.send("note_id="+note.getAttribute("data-key"));
         noteRequest.onload = ()=>{
-            object = JSON.parse(noteRequest.responseText);
-            document.querySelector(".noteTop .title").innerText = object.title;
-
+            parser = new DOMParser();
+            xmlDoc = parser.parseFromString(noteRequest.responseText,"text/xml");
+            console.log(xmlDoc);
+            title = xmlDoc.getElementsByTagName("title")[0].childNodes[0].nodeValue;
+            date = xmlDoc.getElementsByTagName("date")[0].childNodes[0].nodeValue;
+            note = xmlDoc.getElementsByTagName("noteText")[0].childNodes[0].nodeValue;
+            console.log(note);
+            // tags = object.tags;
+            tags = ["Test"];
+            id = xmlDoc.getElementsByTagName("id")[0].childNodes[0].nodeValue;
+            document.querySelector(".noteTop .title").innerText = title;
             // wrong_date will contain date in the local browser timezone.
             //  But the time will be wrong because server returns time in UTC
-            wrong_date = new Date(object.date);
+            wrong_date = new Date(date);
 
             //Now we change the timezone of the date to UTC
             date = new Date(Date.UTC(wrong_date.getFullYear(), wrong_date.getMonth(), wrong_date.getDate(), wrong_date.getHours(), wrong_date.getMinutes(), wrong_date.getSeconds()));
 
             dateOptions = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' }
             document.querySelector(".noteTop .updated").innerText = date.toLocaleString(undefined,dateOptions);
-            document.querySelector(".noteText").innerText = object.note;
+            document.querySelector(".noteText").innerText = note;
             // parse tags and add them to the tag list
             // tags will be an array parsed from object.tags
-            tags = JSON.parse(object.tags);
+            // tags = JSON.parse(tags);
             tagsContainer = document.querySelector(".noteTop .tags");
             tagsContainer.innerText = "";
             if(tags!=null){
@@ -33,7 +41,7 @@ notes.forEach(note=>{
                 })
             }
             //Set the note id in the hidden field
-            document.querySelector("#note_id").value = object.id;
+            document.querySelector("#note_id").value = id;
         }
     })
 })

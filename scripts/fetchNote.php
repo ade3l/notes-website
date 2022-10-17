@@ -17,8 +17,9 @@
             $date = $row['date'];
             $note = $row['note'];
             $tags = $row['tags'];
-            //return the data in json format
-            echo json_encode(array("id"=>$id, "title"=>$title, "date"=>$date, "note"=>$note, "tags"=>$tags));
+            //return the data in xml format
+            echo "<note><id>$id</id><title>$title</title><date>$date</date><noteText>$note</noteText><tags>$tags</tags></note>";
+            // echo json_encode(array("id"=>$id, "title"=>$title, "date"=>$date, "note"=>$note, "tags"=>$tags));
         }
     }
 ?>
