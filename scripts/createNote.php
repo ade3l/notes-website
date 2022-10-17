@@ -5,10 +5,11 @@
         $sql = "INSERT INTO notes (email, id, title, note, date, tags) VALUES ('$email', UUID(),'Untitled', ' ', UTC_TIMESTAMP(), '[]')";
         $result = $conn->query($sql);
         if($result){
-            echo "success";
+            // send response to the client in xml format
+            echo "<response><valid>true</valid></response>";
         }
         else{
-            echo "failure";
+            echo "<response><valid>false</valid></response>";
         }
     
 

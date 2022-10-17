@@ -14,10 +14,11 @@
                 $sql = "DELETE FROM notes WHERE id='$id' and email='$email'";
                 $result = $conn->query($sql);
                 if($result){
-                    echo "success";
+                    // Send a response to the client in xml format
+                    echo "<response><valid>true</valid></response>";
                 }
                 else{
-                    echo "failure";
+                    echo "<response><valid>false</valid></response>";
                 }
             }
             if($data->action=="save"){
@@ -29,10 +30,10 @@
                 $sql = "UPDATE notes SET title='$title', note='$note', date = UTC_TIMESTAMP() WHERE id='$id' and email='$email'";
                 $result = $conn->query($sql);
                 if($result){
-                    echo "success";
+                    echo "<response><valid>true</valid></response>";
                 }
                 else{
-                    echo "failure";
+                    echo "<response><valid>false</valid></response>";
                 }
             }
         }

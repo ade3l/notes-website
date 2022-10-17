@@ -47,9 +47,12 @@ document.querySelector("#deleteNote").addEventListener("click",()=>{
         saveRequest.setRequestHeader("Content-type","application/json")
         saveRequest.send(JSON.stringify({action:"delete",id:note_id}));
         saveRequest.onload = ()=>{
-            if(saveRequest.responseText == "success"){
+            parser = new DOMParser();
+            xmlDoc = parser.parseFromString(saveRequest.responseText,"text/xml");
+            if(xmlDoc.getElementsByTagName("valid")[0].childNodes[0].nodeValue == "true"){
                 location.reload();
             }
+        
         }
     }
 })
@@ -70,12 +73,14 @@ document.querySelector("#saveNote").addEventListener("click",()=>{
         saveRequest.send(JSON.stringify({action:"save",id:note_id,title:note_title,note:note_text,tags:note_tags, date:Date.now()}));
         // console.log(JSON.stringify({action:"save",id:note_id,title:note_title,note:note_text,tags:note_tags,email:email}));
         saveRequest.onload = ()=>{
-            if(saveRequest.responseText == "success"){
+            parser = new DOMParser();
+            response = parser.parseFromString(saveRequest.responseText,"text/html");
+            //Check xml response if valid
+            if(response.querySelector("response").getAttribute("valid") == "true"){
+                //If the note was saved successfully, reload the page
                 location.reload();
             }
-            else{
 
-            }
         }
     }
 })
@@ -86,7 +91,11 @@ document.querySelector("#newNote").addEventListener("click",()=>{
     newNoteRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     newNoteRequest.send();
     newNoteRequest.onload = ()=>{
-        if(newNoteRequest.responseText == "success"){
+        parser = new DOMParser();
+        response = parser.parseFromString(newNoteRequest.responseText,"text/html");
+        //Check xml response if valid
+        if(response.querySelector("response").getAttribute("valid") == "true"){
+            //If the note was saved successfully, reload the page
             location.reload();
         }
     }
