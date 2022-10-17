@@ -27,12 +27,27 @@ form.onsubmit = function(event) {
         loginRequest.setRequestHeader("Content-type","application/json");
         loginRequest.send(JSON.stringify({action:"login", email:email.value, password:password.value}))
         loginRequest.onload = ()=>{
-            if(loginRequest.responseText == "success"){
-                location.reload();
+            if(loginRequest.status == 200){
+                //Get the response xml
+                response = loginRequest.responseText;
+                parser = new DOMParser();
+                console.log(response);
+                xmlDoc = parser.parseFromString(response,"text/xml");
+                //Check if the response is valid
+                if(xmlDoc.getElementsByTagName("valid")[0].childNodes[0].nodeValue == "true"){
+                    location.reload();
+                }
+                else{
+                    document.querySelector(".error").innerText = xmlDoc.getElementsByTagName("error")[0].childNodes[0].nodeValue;
+                }
             }
-            else{
-                document.querySelector(".error").innerText = "Please recheck your email and password";
-            }
+
+            // if(loginRequest.responseText == "success"){
+            //     location.reload();
+            // }
+            // else{
+            //     document.querySelector(".error").innerText = "Please recheck your email and password";
+            // }
         }
         return true
     }

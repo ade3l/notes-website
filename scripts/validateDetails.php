@@ -1,6 +1,7 @@
 <?php
     session_start();
     if($_SERVER["REQUEST_METHOD"]=="POST"){
+      $result = "<loginResponse>";
       $json = file_get_contents("php://input");
       $data = json_decode($json);
       $email = clean_input($data->email);
@@ -10,31 +11,34 @@
       $result = $conn -> query($sql);
       if($result){
           if($result->num_rows == 0){
-              echo "here";
               $valid = false;
               $error = "Please recheck your email and password";
+              $result = "<loginResponse><valid>false</valid><error>Please check your email address and password</error></loginResponse>";
             }
-            if($result->num_rows == 1){
-            while($row = $result->fetch_assoc()){
-                $name = $row["name"];
-            }
-            $valid = true;
+            else if($result->num_rows == 1){
+              while($row = $result->fetch_assoc()){
+                  $name = $row["name"];
+              }
+              $valid = true;
         }
-      }
+      
+      
       if($valid){
         $_SESSION["LOGGED_IN"] = "TRUE";
         $_SESSION["name"] =" $name";
         $_SESSION["email"] = "$email";
-        echo "success";
+        $result = "<loginResponse><valid>true</valid></loginResponse>";
+        echo $result;
       }
       else{
-        echo "failure";
+        echo $result;
       }
     }
-    function clean_input($data){
-        $data = stripslashes($data);
-        $data = trim($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
+  }
+  function clean_input($data){
+      $data = stripslashes($data);
+      $data = trim($data);
+      $data = htmlspecialchars($data);
+      return $data;
+  }
 ?>
